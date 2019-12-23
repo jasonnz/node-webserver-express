@@ -15,10 +15,15 @@ const forecast = (lattitude, longtitude, callback) => {
         } else if (body.code == 400) {
             console.log(body.error);
         } else {
+           
             const forecastdata = body.daily.data[0].summary + ' It is currently ' + body.currently.temperature + ' out with a %' + body.currently.precipProbability + ' chance of rain.';
 
+            const forecastdataLow = ' The low for the day is: ' + body.daily.data[0].temperatureLow;
+            const forecastdataHigh = ' The high for the day is: ' + body.daily.data[0].apparentTemperatureHigh;
+
+            console.log(body.daily.data[0])
             callback(undefined, {
-                forecastdata: forecastdata
+                forecastdata: forecastdata + forecastdataLow + forecastdataHigh
             })
         }
 
